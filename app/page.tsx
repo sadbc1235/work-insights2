@@ -1,23 +1,26 @@
-import MainColContainer from "@/components/MainColContainer";
-import Title from "@/components/Title";
+import Division from "@/components/common/Division";
+import HomePage from "@/components/main/homePage/HomePage";
+import Support from "@/components/main/support/Support";
+import Store from "@/components/main/store/Store";
+import Footer from "@/components/main/footer/Footer";
+import MainTitle from "@/components/main/mainTitle/MainTitle";
 
 export default function Home() {
   return (
     <>
-      <Title text="공식 홈페이지" />
-      <MainColContainer
-        className={"mt-6"}
-      >
-        <article className="object-contain">
-          <img className="w-full h-full" src="/001.png"/>
-        </article>
-        <article className="object-contain">
-          <img className="w-full h-full" src="/002.png"/>
-        </article>
-        <article className="object-contain">
-          <img className="w-full h-full" src="/003.png"/>
-        </article>
-      </MainColContainer>
+      <MainTitle/>
+
+      <HomePage/>
+
+      <Division/>
+
+      <Support/>
+
+      <Division/>
+      
+      <Store/>
+
+      <Footer/>
     </>
   );
 }
