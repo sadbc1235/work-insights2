@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import dynamic from "next/dynamic"
-const Header = dynamic(() => import('../components/header/Header'), { ssr: false })
+const Header = dynamic(() => import('../components/header/Header'), { ssr: false });
 
 export const metadata: Metadata = {
   title: 'Work Insihgts',

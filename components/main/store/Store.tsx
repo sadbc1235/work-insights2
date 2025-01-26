@@ -6,7 +6,7 @@ export default function Store() {
     <>
         <Title text="store" />
         <RowContainer>
-            <article className="object-contain overflow-hidden rounded-[60px] shadow-xl">
+            <article className="object-contain overflow-hidden rounded-[60px] shadow-xl cursor-pointer">
                 <img className="w-full h-full" src="/001-3.png"/>
             </article>
             <article className="object-cover overflow-hidden rounded-[60px] shadow-xl">

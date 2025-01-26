@@ -7,7 +7,7 @@ export default function HomePage() {
       <div className="mt-[100px] max-sm:mt-[50px]"></div>
       <Title text="공식 홈페이지" />
       <HomePageContainer>
-        <article className="object-contain shadow-xl">
+        <article className="object-contain shadow-xl cursor-pointer">
           <img className="w-full h-full" src="/001.png"/>
         </article>
         <article className="object-contain shadow-xl">
