@@ -1,7 +1,8 @@
 'use client'
 
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import HeaderNav from "../nav/HeaderNav";
+import SideNav from "../nav/SideNav";
 
 export default function Header() {
     useEffect(() => {
@@ -15,6 +16,8 @@ export default function Header() {
     const [headerClassName, setHeaderClassName] = useState('bg-[#fff0] border-[#fff0]');
     const [logoClassName, setLogoClassName] = useState('text-[#000c]');
     const [headerNavClassName, setHeaderNavClassName] = useState('hidden');
+    const [sideNavBgClassName, setSideNavBgClassName] = useState('w-0');
+    const [sideNavClassName, setSideNavClassName] = useState('left-[-250px]');
 
     const handle = {
         onScroll: useCallback((event:any) => {
@@ -27,11 +30,21 @@ export default function Header() {
                 setLogoClassName('text-[#000c]');
             }
         }, [])
-        , onMouseEnter: () => {
-            setHeaderNavClassName('blpck');
+        , showHeaderNav: (isShow:boolean) => {
+            if (isShow) {
+                setHeaderNavClassName('block');
+            } else {
+                setHeaderNavClassName('hidden');
+            }
         }
-        , onMouseLeave: () => {
-            setHeaderNavClassName('hidden');
+        , showSideNav: (isShow:boolean) => {
+            if (isShow) {
+                setSideNavBgClassName('w-full');
+                setSideNavClassName('left-0');
+            } else {
+                setSideNavBgClassName('w-0');
+                setSideNavClassName('left-[-250px]');
+            }
         }
     }
 
@@ -39,7 +52,9 @@ export default function Header() {
         <>
         <header className={baseHeaderClassName+headerClassName}>
             <div className="h-full flex items-center">
-                <svg className="w-[20px] fill-[#000c] mr-5 hidden max-md:block cursor-pointer" viewBox="0 0 24 24" stroke="currentColor" focusable="false">
+                <svg 
+                    onClick={handle.showSideNav.bind(null, true)}
+                    className="w-[20px] fill-[#000c] mr-5 hidden max-md:block cursor-pointer" viewBox="0 0 24 24" stroke="currentColor" focusable="false">
                     <g transform="translate(12,12)">
                         <path d="M-9 -5 L9 -5" fill="none" stroke-width="2"></path>
                         <path d="M-9 0 L9 0" fill="none" stroke-width="2"></path>
@@ -51,7 +66,7 @@ export default function Header() {
             <div className="h-full flex items-center">
                 <div 
                     className="flex items-center mr-5 max-md:hidden cursor-pointer"
-                    onMouseEnter={handle.onMouseEnter}
+                    onMouseEnter={handle.showHeaderNav.bind(null, true)}
                 >
                     <div className="font-bold text-[#000c] mr-1">홈</div>
                     <svg className="w-[20px] fill-[#000c]" viewBox="0 0 24 24" stroke="currentColor" focusable="false">
@@ -71,7 +86,12 @@ export default function Header() {
         </header>
         <HeaderNav
             headerNavClassName={headerNavClassName}
-            onMouseLeave={handle.onMouseLeave}
+            onMouseLeave={handle.showHeaderNav.bind(null, false)}
+        />
+        <SideNav
+            sideNavBgClassName={sideNavBgClassName}
+            sideNavClassName={sideNavClassName}
+            showSideNav={handle.showSideNav.bind(null, false)}  
         />
         </>
     );
